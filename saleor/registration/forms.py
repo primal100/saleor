@@ -9,6 +9,7 @@ from templated_email import send_templated_mail
 from django.utils.translation import ugettext_lazy as _
 
 from saleor.userprofile.models import User
+from .utils import send_activation_mail
 
 
 class LoginForm(django_forms.AuthenticationForm):
@@ -25,12 +26,9 @@ class LoginForm(django_forms.AuthenticationForm):
     def confirm_login_allowed(self, user):
         super().confirm_login_allowed(user)
         if settings.ACCOUNT_EMAIL_VERIFICATION and not user.is_staff and not user.email_verified:
-            messages.info(self.request, _("Click here to resend activation e-mail"))
-            raise forms.ValidationError('%s< a href="%s"></a>%s' % (
-                _('E-mail address has not been confirmed for this account.'),
-                reverse("resend-verification-email"),
-                _('Click here to resend activation e-mail.'),
-                ),
+            send_activation_mail(self.request, user)
+            raise forms.ValidationError(
+                _('E-mail address has not been confirmed for this account. Activation e-mail has been resent.'),
                 code='inactive',
             )
 
