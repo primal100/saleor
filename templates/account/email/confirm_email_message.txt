@@ -1,0 +1,10 @@
+{% load i18n %}{% blocktrans %}Hello from {{ site_name }}!
+
+You're receiving this e-mail because user {{ user_display }} has given yours as an e-mail address to connect their account.
+
+To confirm your e-mail, click the following link: {% endblocktrans %}
+
+{{ protocol}}://{{ domain }}{% url 'account_confirm_email' uidb64=uid token=token %}
+
+{% blocktrans %}Thank you for signing up to {{ site_name }}!
+{{ domain }}{% endblocktrans %}

@@ -1,11 +1,14 @@
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin)
 from django.db import models
+from django.conf import settings
 from django.forms.models import model_to_dict
 from django.utils import timezone
+from django.utils.crypto import get_random_string
 from django.utils.translation import pgettext_lazy
 from django_countries.fields import Country, CountryField
 from phonenumber_field.modelfields import PhoneNumberField
+from datetime import datetime
 
 from .validators import validate_possible_number
 
@@ -145,6 +148,10 @@ class User(PermissionsMixin, AbstractBaseUser):
         Address, related_name='+', null=True, blank=True,
         on_delete=models.SET_NULL,
         verbose_name=pgettext_lazy('User field', 'default billing address'))
+    email_verified = models.BooleanField(
+        pgettext_lazy('User field', 'e-mail verified'),
+        default=False, editable=False
+    )
 
     USERNAME_FIELD = 'email'
 

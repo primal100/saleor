@@ -1,9 +1,12 @@
 from django import forms
+from django.conf import settings
 from django.contrib.auth import forms as django_forms
+from django.contrib import messages
 from django.http.request import HttpRequest
 from django.urls import reverse
 from django.utils.translation import pgettext
 from templated_email import send_templated_mail
+from django.utils.translation import ugettext_lazy as _
 
 from saleor.userprofile.models import User
 
@@ -19,6 +22,17 @@ class LoginForm(django_forms.AuthenticationForm):
             if email:
                 self.fields['username'].initial = email
 
+    def confirm_login_allowed(self, user):
+        super().confirm_login_allowed(user)
+        if settings.ACCOUNT_EMAIL_VERIFICATION and not user.is_staff and not user.email_verified:
+            messages.info(self.request, _("Click here to resend activation e-mail"))
+            raise forms.ValidationError('%s< a href="%s"></a>%s' % (
+                _('E-mail address has not been confirmed for this account.'),
+                reverse("resend-verification-email"),
+                _('Click here to resend activation e-mail.'),
+                ),
+                code='inactive',
+            )
 
 class SignupForm(forms.ModelForm):
     password = forms.CharField(
