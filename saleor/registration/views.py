@@ -40,14 +40,13 @@ def logout(request):
 def signup(request):
     form = SignupForm(request.POST or None)
     if form.is_valid():
-        user = form.save()
-        password = form.cleaned_data.get('password')
-        email = form.cleaned_data.get('email')
-        if settings.ACCOUNT_EMAIL_VERIFICATION:
-            send_activation_mail(request, user)
-            messages.success(request, _('User has been created. Check your e-mail to confirm your e-mail address.'))
+        form.save(request)
+        if settings.EMAIL_VERIFICATION_REQUIRED:
+            messages.success(request, _('User has been created. Check your e-mail to verify your e-mail address.'))
             redirect_url = reverse_lazy("account_login")
         else:
+            password = form.cleaned_data.get('password')
+            email = form.cleaned_data.get('email')
             user = auth.authenticate(
                 request=request, email=email, password=password)
             if user:
@@ -105,12 +104,12 @@ class EmailVerificationView(View):
             if self.token_generator.check_token(self.user, token):
                 self.user.email_verified = True
                 self.user.save()
-                messages.success(self.request, _("E-mail confirmation successful"))
+                messages.success(self.request, _("E-mail verification successful. You may now login."))
             else:
                 send_activation_mail(self.request, self.user)
-                messages.error(self.request, _("E-mail confirmation failed. Activtion e-mail resent."))
+                messages.error(self.request, _("E-mail verification failed. Activation e-mail resent."))
         else:
-            messages.error(self.request, _("E-mail confirmation failed. User not found."))
+            messages.error(self.request, _("E-mail verification failed. User not found."))
         return HttpResponseRedirect(reverse_lazy('account_login'))
 
     def get_user(self, uidb64):
@@ -121,3 +120,5 @@ class EmailVerificationView(View):
         except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
             user = None
         return user
+
+email_confirmation = EmailVerificationView.as_view()

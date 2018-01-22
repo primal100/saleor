@@ -25,7 +25,7 @@ class LoginForm(django_forms.AuthenticationForm):
 
     def confirm_login_allowed(self, user):
         super().confirm_login_allowed(user)
-        if settings.ACCOUNT_EMAIL_VERIFICATION and not user.is_staff and not user.email_verified:
+        if settings.EMAIL_VERIFICATION_REQUIRED and not user.is_staff and not user.email_verified:
             send_activation_mail(self.request, user)
             raise forms.ValidationError(
                 _('E-mail address has not been confirmed for this account. Activation e-mail has been resent.'),
@@ -51,6 +51,8 @@ class SignupForm(forms.ModelForm):
         user = super().save(commit=False)
         password = self.cleaned_data['password']
         user.set_password(password)
+        if settings.EMAIL_VERIFICATION_REQUIRED:
+            send_activation_mail(request, user)
         if commit:
             user.save()
         return user

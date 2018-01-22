@@ -20,6 +20,7 @@ def send_activation_mail(request, user):
     email = user.email
 
     context = {
+        'protocol': 'https' if request.is_secure() else 'http',
         'email': email,
         'domain': domain,
         'site_name': site_name,

@@ -1,8 +1,8 @@
 {% load i18n %}{% blocktrans %}Hello from {{ site_name }}!
 
-You're receiving this e-mail because user {{ user_display }} has given yours as an e-mail address to connect their account.
+You're receiving this e-mail because a new user has been registered with our site using this e-mail address.
 
-To confirm your e-mail, click the following link: {% endblocktrans %}
+In order to activate your account, please confirm your e-mail by clicking the following link: {% endblocktrans %}
 
 {{ protocol}}://{{ domain }}{% url 'account_confirm_email' uidb64=uid token=token %}
 
