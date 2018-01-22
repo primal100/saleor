@@ -1,14 +1,15 @@
 from django import forms
-from django.conf import settings
 from django.contrib.auth import forms as django_forms
 from django.http.request import HttpRequest
 from django.urls import reverse
-from django.utils.translation import pgettext, ugettext_lazy as _
-
+from django.utils.translation import pgettext, pgettext_lazy
 from templated_email import send_templated_mail
 
-from saleor.userprofile.models import User
+from ..userprofile.models import User
+
+from django.conf import settings
 from .utils import send_activation_mail
+
 
 
 class LoginForm(django_forms.AuthenticationForm):
@@ -22,24 +23,19 @@ class LoginForm(django_forms.AuthenticationForm):
             if email:
                 self.fields['username'].initial = email
 
-    def confirm_login_allowed(self, user):
-        super().confirm_login_allowed(user)
-        if settings.EMAIL_VERIFICATION_REQUIRED and not user.is_staff and not user.email_verified:
-            send_activation_mail(self.request, user)
-            raise forms.ValidationError(
-                _('E-mail address has not been confirmed for this account. Activation e-mail has been resent.'),
-                code='inactive',
-            )
-
 
 class SignupForm(forms.ModelForm):
     password = forms.CharField(
-        label=pgettext('User form field', 'Password'),
         widget=forms.PasswordInput)
 
     class Meta:
         model = User
         fields = ('email',)
+        labels = {
+            'email': pgettext_lazy(
+                'Email', 'Email'),
+            'password': pgettext_lazy(
+                'Password', 'Password')}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -56,6 +52,17 @@ class SignupForm(forms.ModelForm):
         if settings.EMAIL_VERIFICATION_REQUIRED:
             send_activation_mail(request, user)
         return user
+
+    def confirm_login_allowed(self, user):
+        super().confirm_login_allowed(user)
+
+        if settings.EMAIL_VERIFICATION_REQUIRED and not user.is_staff and not user.email_verified:
+            send_activation_mail(self.request, user)
+
+            raise forms.ValidationError(pgettext('Login Error',
+                    'E-mail address has not been confirmed for this account. Activation e-mail has been resent.'),
+                    code='inactive',
+            )
 
 
 class PasswordSetUpForm(django_forms.PasswordResetForm):
