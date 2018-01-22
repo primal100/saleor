@@ -46,8 +46,6 @@ Environment variables
 ``EMAIL_VERIFICATION_REQUIRED``
   Controls whether newly registered users have to verify their e-mail address before logging in. If True, applies only to non-staff users. Defaults to ``False``.
 
-  Separate multiple values with comma.
-
 ``INTERNAL_IPS``
   Controls `Django's internal IPs <https://docs.djangoproject.com/en/1.10/ref/settings/#internal-ips>`_ setting. Defaults to ``127.0.0.1``.
 
