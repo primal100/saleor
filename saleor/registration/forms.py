@@ -1,12 +1,11 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth import forms as django_forms
-from django.contrib import messages
 from django.http.request import HttpRequest
 from django.urls import reverse
-from django.utils.translation import pgettext
+from django.utils.translation import pgettext, ugettext_lazy as _
+
 from templated_email import send_templated_mail
-from django.utils.translation import ugettext_lazy as _
 
 from saleor.userprofile.models import User
 from .utils import send_activation_mail
@@ -31,6 +30,7 @@ class LoginForm(django_forms.AuthenticationForm):
                 _('E-mail address has not been confirmed for this account. Activation e-mail has been resent.'),
                 code='inactive',
             )
+
 
 class SignupForm(forms.ModelForm):
     password = forms.CharField(

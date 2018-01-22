@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
-from django.core import mail
+
 from django.urls import reverse
 from django.test import override_settings
-import re
+
 import pytest
 
 from saleor.registration.backends import BaseBackend

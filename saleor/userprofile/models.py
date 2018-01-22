@@ -1,14 +1,13 @@
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin)
 from django.db import models
-from django.conf import settings
+
 from django.forms.models import model_to_dict
 from django.utils import timezone
-from django.utils.crypto import get_random_string
+
 from django.utils.translation import pgettext_lazy
 from django_countries.fields import Country, CountryField
 from phonenumber_field.modelfields import PhoneNumberField
-from datetime import datetime
 
 from .validators import validate_possible_number
 

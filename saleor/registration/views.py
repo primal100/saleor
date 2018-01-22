@@ -14,7 +14,6 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.cache import never_cache
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.decorators.http import require_http_methods
 
 from saleor.cart.utils import find_and_assign_anonymous_cart
 
@@ -22,6 +21,7 @@ from .forms import LoginForm, PasswordSetUpForm, SignupForm
 from .utils import send_activation_mail
 
 UserModel = get_user_model()
+
 
 @find_and_assign_anonymous_cart()
 def login(request):
@@ -85,7 +85,6 @@ def password_reset_confirm(request, uidb64=None, token=None):
     return PasswordResetConfirm.as_view(**kwargs)(
         request, **kwargs)
 
-INTERNAL_CONFIRM_URL_TOKEN = 'confirm-email'
 
 class EmailVerificationView(View):
     success_url = reverse_lazy('account_login')
@@ -120,5 +119,6 @@ class EmailVerificationView(View):
         except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
             user = None
         return user
+
 
 email_confirmation = EmailVerificationView.as_view()
