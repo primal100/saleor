@@ -51,10 +51,10 @@ class SignupForm(forms.ModelForm):
         user = super().save(commit=False)
         password = self.cleaned_data['password']
         user.set_password(password)
-        if settings.EMAIL_VERIFICATION_REQUIRED:
-            send_activation_mail(request, user)
         if commit:
             user.save()
+        if settings.EMAIL_VERIFICATION_REQUIRED:
+            send_activation_mail(request, user)
         return user
 
 
