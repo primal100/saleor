@@ -37,13 +37,6 @@ def logout(request):
     return redirect(settings.LOGIN_REDIRECT_URL)
 
 
-@require_http_methods(["POST"])
-def resend_activation_email(request):
-    send_activation_mail(request, request.user)
-    messages.success(request, _("E-mail sent. Please check your email to activate your account."))
-    return redirect(reverse_lazy("account_login"))
-
-
 def signup(request):
     form = SignupForm(request.POST or None)
     if form.is_valid():

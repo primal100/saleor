@@ -20,5 +20,4 @@ urlpatterns = [
         name='account_reset_password_complete'),
     url(r'^email/confirmation/verify/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',  # noqa
         views.password_reset_confirm, name='account_confirm_email'),
-    url(r'^email-confirmation/resend/$', views.resend_activation_email, name='resend-verification-email'),
 ]
