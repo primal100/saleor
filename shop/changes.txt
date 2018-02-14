@@ -1,0 +1,9 @@
+webpack.config.js:
+ logo: './shop/static/images/favicon.png',
+Add: resolve('shop/static/images') to include
+
+Change manage.py to point to shop.settings
+
+https://github.com/primal100/shop/compare/0ec214a...master
+Next: saleor/order/views
+

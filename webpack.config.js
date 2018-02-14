@@ -54,7 +54,7 @@ var providePlugin = new webpack.ProvidePlugin({
 });
 
 var faviconsWebpackPlugin = new FaviconsWebpackPlugin({
-  logo: './saleor/static/images/favicon.svg',
+  logo: './shop/static/images/favicon.png',
   prefix: 'favicons/',
   title: "Saleor"
 });
@@ -115,7 +115,8 @@ var config = {
           resolve('node_modules'),
           resolve('saleor/static/fonts'),
           resolve('saleor/static/images'),
-          resolve('saleor/static/dashboard/images')
+          resolve('saleor/static/dashboard/images'),
+          resolve('shop/static/images')
         ]
       }
     ]
