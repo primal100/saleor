@@ -1,6 +1,8 @@
-import os
-import dj_database_url
 from saleor.settings import *
+
+ROOT_URLCONF = 'shop.urls'
+
+WSGI_APPLICATION = 'shop.wsgi.application'
 
 TIME_ZONE = 'Africa/Kampala'
 USE_I18N = False
@@ -58,10 +60,15 @@ INSTALLED_APPS = [
     'shop.productx'
     ]
 
+STATICFILES_DIRS = [
+    ('assets', os.path.join(PROJECT_ROOT, 'shop', 'static', 'assets')),
+    ('images', os.path.join(PROJECT_ROOT, 'shop', 'static', 'images')),
+] + STATICFILES_DIRS
+
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': [os.path.join(PROJECT_ROOT, 'templates'),
-             os.path.join(PROJECT_ROOT, 'shop', 'templates')],
+    'DIRS': [os.path.join(PROJECT_ROOT, 'shop', 'templates'),
+             os.path.join(PROJECT_ROOT, 'templates')],
     'OPTIONS': {
         'debug': DEBUG,
         'context_processors': context_processors,
@@ -82,7 +89,7 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     'django_babel.middleware.LocaleMiddleware',
     'saleor.core.middleware.discounts',
-    'shop.core.middleware.google_analytics',
+    'shop.corex.middleware.google_analytics',
     'saleor.core.middleware.country',
     'saleor.core.middleware.currency',
     'saleor.core.middleware.site',

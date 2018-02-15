@@ -13,7 +13,7 @@ def report_view(client_id, ip, path, language, headers):
     host_name = headers.get('HTTP_HOST', None)
     referrer = headers.get('HTTP_REFERER', None)
     pv = ga.PageView(path, host_name=host_name, referrer=referrer)
-    extra_info = {'language': language, 'uip': ip}
+    extra_info = [{'ul': language, 'uip': ip}]
     extra_headers = {}
     user_agent = headers.get('HTTP_USER_AGENT', None)
     if user_agent:

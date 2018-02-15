@@ -4,6 +4,7 @@
 {% load product_first_image from product_images %}
 {% load get_thumbnail from product_images %}
 {% load placeholder %}
+{% load gross from prices_i18n %}
 
 {% for product, availability in products %}
   <div class="col-6 col-lg-3 product-list">
@@ -31,13 +32,13 @@
                 </div>
               {% endif %}
             {% endif %}
-            {% if availability.price_range_local_currency %}
-              <br>
-              <small class="text-info">
-                &asymp;
-                {% gross availability.price_range_local_currency.min_price html=True %}
-              </small>
-            {% endif %}
+              {% if availability.price_range_local_currency %}
+                <br>
+                <small class="text-info">
+                  &asymp;
+                  {% gross availability.price_range_local_currency.min_price html=True %}
+                </small>
+              {% endif %}
           {% else %}
             &nbsp;
           {% endif %}
