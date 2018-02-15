@@ -8,5 +8,5 @@ def changecurrency(request):
     if request.user and request.user.is_authenticated:
         UserPreferences.objects.update_or_create(user=request.user, defaults={'currency': currency})
     else:
-        UserPreferences.objects.update_or_create(session=request.session, defaults={'currency': currency})
+        UserPreferences.objects.update_or_create(sessionid=request.session.session_key, defaults={'currency': currency})
     return redirect(next_path)

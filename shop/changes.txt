@@ -11,7 +11,5 @@ Next: saleor/order/views
 todo:
 
 fix sales
-currencies
-stripe
-
+nothing found image
 

@@ -43,7 +43,7 @@ def payment(request, token):
             return redirect('order:payment', token=order.token,
                             variant=payment_method)
     stripe_provider = provider_factory("stripe")
-    stripe_payment = create_payment(request, variant="stripe", payment_data_only=True, token=token)
+    stripe_payment = create_payment(request, variant="stripe", token=token)
     stripe_form = ModalPaymentForm(email=getattr(request.user, "email", None), provider=stripe_provider, payment=stripe_payment)
     return TemplateResponse(request, 'order/payment.html',
                             {'order': order, 'groups': groups,
@@ -56,7 +56,7 @@ def payment(request, token):
 @check_order_status
 def create_payment(request, order, variant):
     billing = order.billing_address
-    total = order.get_total()
+    total = order.total
     defaults = {'total': total.gross,
                 'tax': total.tax, 'currency': total.currency,
                 'delivery': order.shipping_price.gross,

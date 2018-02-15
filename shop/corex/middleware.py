@@ -7,6 +7,8 @@ from django.utils.translation import get_language
 from saleor.core.analytics import _report, get_client_id
 from saleor.core.utils import get_client_ip, get_currency_for_country
 
+from shop.corex.models import UserPreferences
+
 logger = logging.getLogger(__name__)
 
 def report_view(client_id, ip, path, language, headers):
@@ -40,14 +42,17 @@ def google_analytics(get_response):
 def currency(get_response):
     """Take a country and assign a matching currency to `request.currency`."""
     def middleware(request):
-        if hasattr(request, 'user') and request.user.is_authenticated and request.user.currency:
-            request.currency = request.user.currency
-        elif hasattr(request, 'session') and request.session.get('currency', None):
-            request.currency = request.session['currency']
-        if hasattr(request, 'country') and request.country is not None:
-            request.currency = get_currency_for_country(request.country)
-        else:
-            request.currency = settings.DEFAULT_CURRENCY
+        if hasattr(request, 'user') and request.user.is_authenticated:
+            request.currency = UserPreferences.objects.filter(user=request.user).values_list('currency',
+                                                            flat=True).first()
+        elif hasattr(request, 'session'):
+            request.currency = UserPreferences.objects.filter(sessionid=request.session.session_key).values_list('currency',
+                                                            flat=True).first()
+        if not hasattr(request, "currency") or not request.currency:
+            if hasattr(request, 'country') and request.country is not None:
+                request.currency = get_currency_for_country(request.country)
+            else:
+                request.currency = settings.DEFAULT_CURRENCY
         return get_response(request)
 
     return middleware

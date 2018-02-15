@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'impersonate',
     'phonenumber_field',
 
+    #Custom apps
     'shop.corex',
     'shop.orderx',
     'shop.productx'
@@ -80,6 +81,10 @@ DATABASES = {
         default='postgres://saleor:saleor@localhost:5432/saleorshop',
         conn_max_age=600)}
 
+context_processors += [
+    'shop.corex.context_processors.currencies'
+]
+
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -91,7 +96,7 @@ MIDDLEWARE = [
     'saleor.core.middleware.discounts',
     'shop.corex.middleware.google_analytics',
     'saleor.core.middleware.country',
-    'saleor.core.middleware.currency',
+    'shop.corex.middleware.currency',
     'saleor.core.middleware.site',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'impersonate.middleware.ImpersonateMiddleware']
