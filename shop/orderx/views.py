@@ -44,7 +44,7 @@ def payment(request, token):
                             variant=payment_method)
     stripe_provider = provider_factory("stripe")
     stripe_payment = create_payment(request, variant="stripe", token=token)
-    stripe_form = ModalPaymentForm(email=getattr(request.user, "email", None), provider=stripe_provider, payment=stripe_payment)
+    stripe_form = ModalPaymentForm(email=order.user_email, provider=stripe_provider, payment=stripe_payment)
     return TemplateResponse(request, 'order/payment.html',
                             {'order': order, 'groups': groups,
                              'payment_form': payment_form,
