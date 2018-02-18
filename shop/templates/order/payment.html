@@ -77,7 +77,6 @@
             </h1>
             <form method="post" action="{% url "order:payment" token=order.token %}" class="payment-method-form radio">
               {% csrf_token %}
-              <button class="btn btn-secondary p-3 mt-0" type="submit" value="default" name="method">Dummy Provider</button>
               <button class="btn btn-secondary p-3 mt-0" type="submit" value="paypal" name="method"> <img src="{% static 'images/PayPal-logo.png' %}" width="80" /></button>
             </form>
             <form method="post" action="{% url "order:payment" token=order.token variant='stripe' %}" novalidate>

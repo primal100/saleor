@@ -102,7 +102,6 @@ MIDDLEWARE = [
     'impersonate.middleware.ImpersonateMiddleware']
 
 PAYMENT_VARIANTS = {
-    'default': ('payments.dummy.DummyProvider', {}),
     'paypal': ('payments.paypal.PaypalProvider', {
         'client_id': 'ASNU9Lt0AYxvzhuVL8P4ycsav3KtdXWsoZ8Kuz0if2IBvZ6TaGNzIQUvhF8qRjjj3Cv9PPlZRXzeRzcH',
         'secret': os.environ.get("PAYPAL_SECRET"),
@@ -113,4 +112,4 @@ PAYMENT_VARIANTS = {
         'public_key': 'pk_test_nxCSX2soBvRTS1Q5MYejQ8vN'})
     }
 CHECKOUT_PAYMENT_CHOICES = [
-    ('default', 'Dummy provider'), ('paypal', 'Paypal'), ('stripe', 'Credit Card')]
+    ('paypal', 'Paypal'), ('stripe', 'Credit Card')]
