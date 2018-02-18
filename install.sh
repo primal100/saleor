@@ -5,6 +5,7 @@ POSTGRES_PASSWORD=
 APPNAME=shop
 REPOSITORY_URL=https://github.com/primal100/shop
 REPOSITORY_DIRNAME=shop
+BRANCH_NAME=myshop
 
 cd $HOME
 sudo yum install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
@@ -46,10 +47,11 @@ cd $APPNAME
 source $HOME/$APPNAME/bin/activate
 git clone $REPOSITORY_URL
 cd $REPOSITORY_DIRNAME
+git checkout $BRANCH_NAME
 pip3 install -r requirements.txt
 npm install
 npm run build-assets
-
+npm run build-emails
 
 
 ...Enter environment variables
@@ -323,7 +325,7 @@ sudo certbot --nginx -d nilepottery.com
 cd $HOME/shop
 mkdir backups
 cd backups
-su - shop -c "/usr/pgsql-9.6/bin/pg_dump shop > backup251217"
+su - shop -c "/usr/pgsql-9.6/bin/pg_dump shop" > backup170217
 
 cronjob > db backups, update exchange rates
 
@@ -335,3 +337,15 @@ cronjob > db backups, update exchange rates
 #Set instance cloud API access control full access
 #Storage: set service account as Storage Admin, set allUsers as Viewer
 #Fix favicon: 1500x1500 < 1mb
+
+#Google storage paramaters, if required:
+
+GS_PROJECT_ID='nile-pottery'
+GS_STATIC_BUCKET_NAME='static.nilepottery.com'
+GS_MEDIA_BUCKET_NAME='media.nilepottery.com'
+GS_STATIC_URL='https://static.nilepottery.com'
+GS_MEDIA_URL='https://media.nilepottery.com'
+
+#Save file with sudo:
+
+#:w !sudo tee % > /dev/null

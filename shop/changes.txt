@@ -5,11 +5,5 @@ Add: resolve('shop/static/images') to include
 Change manage.py to point to shop.settings
 
 https://github.com/primal100/shop/compare/0ec214a...master
-Next: saleor/order/views
-
 
 todo:
-
-fix sales
-nothing found image
-
