@@ -1,0 +1,14 @@
+{% load i18n %}
+
+{% block subject %}
+  {{ subject }}
+{% endblock %}
+
+{% block plain %}
+From {{ name }}:
+
+{{ message }}
+
+{% block html %}
+{% include 'templated_email/compiled/contactus.html' %}
+{% endblock %}

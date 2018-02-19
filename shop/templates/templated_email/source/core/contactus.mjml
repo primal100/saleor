@@ -1,0 +1,27 @@
+<mjml>
+  <mj-head>
+    <mj-include path="../shared/styles" />
+  </mj-head>
+  <mj-body>
+    <mj-container>
+      <mj-section css-class="no-display">
+        <mj-column>
+          <mj-text>
+            {% load i18n %}
+          </mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-include path="../shared/header" />
+      <mj-section>
+        <mj-column>
+          <mj-text font-size="16px">
+            From {{ name }}:
+          </mj-text>
+          <mj-text>
+            {{ message }}
+          </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-container>
+  </mj-body>
+</mjml>

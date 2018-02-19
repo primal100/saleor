@@ -7,3 +7,9 @@ Change manage.py to point to shop.settings
 https://github.com/primal100/shop/compare/0ec214a...master
 
 todo:
+[15:07, 2/19/2018] Uganda Victoria: We also have to say that order take up to 3weeks...I have tried to do a bulk order (10😅🤣) of teapots as I think we will sell those super fast...
+[15:08, 2/19/2018] Uganda Victoria: I do think we should different prices for locals and non...
+[14:54, 2/19/2018] Uganda Victoria: What do we have in terms of "about us?"
+[14:54, 2/19/2018] Uganda Victoria: And home page?
+[14:54, 2/19/2018] Uganda Victoria: Contacts etc...
+I also had wanted to do a write up about the products..

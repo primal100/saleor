@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load bootstrap_form from bootstrap4 %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Contact us" context "Contact us page title" %} — {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+  <ul class="breadcrumbs list-unstyled">
+    <li>
+      <a href="{% url 'home' %}">
+        {% trans "Home" context "Main navigation item" %}
+      </a>
+    </li>
+    <li>{% trans "Contact Us" context "Main navigation item" %}</li>
+  </ul>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+  <div class="col-4 col-md-4 offset-md-2">
+    <h2>{% trans "Contact Us" %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <p class="text-right">
+      <button type="submit" class="btn primary narrow">
+        {% trans "Submit" context "Contact us" %}
+      </button>
+    </p>
+  </form>
+  </div>
+  <div class="col-4 col-md-4 offset-md-2">
+    <h2>{% trans "Address" %}</h2>
+      Nile Pottery,<br>
+      Kampala,<br>
+      Uganda<br>
+  </div>
+</div>
+</div>
+{% endblock %}

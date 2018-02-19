@@ -1,4 +1,7 @@
+from django.contrib import messages
 from django.shortcuts import redirect
+from django.views.generic import FormView
+from .forms import ContactForm
 from .models import UserPreferences
 
 def changecurrency(request):
@@ -10,3 +13,15 @@ def changecurrency(request):
     else:
         UserPreferences.objects.update_or_create(sessionid=request.session.session_key, defaults={'currency': currency})
     return redirect(next_path)
+
+class ContactView(FormView):
+    template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.send_email()
+        result = super().form_valid(form)
+        messages.success(self.request,
+                         "Thanks for your e-mail We will respond as soon as possible")
+        return result
