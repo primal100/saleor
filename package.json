@@ -90,6 +90,7 @@
     "build-assets": "node ./node_modules/webpack/bin/webpack.js -p --progress --verbose",
     "heroku-postbuild": "npm run build-assets",
     "start": "UV_THREADPOOL_SIZE=8 node ./node_modules/webpack/bin/webpack.js -d --watch --progress",
-    "build-emails": "mkdir -p templates/templated_email/compiled/ && find templates -name \"*.mjml\" -not -path \"templates/templated_email/source/*partials/*\" -not -path \"templates/templated_email/source/*shared/*\" -exec ./node_modules/.bin/mjml -l skip {} -o templates/templated_email/compiled/ \\;"
+    "build-emails": "mkdir -p templates/templated_email/compiled/ && find templates -name \"*.mjml\" -not -path \"templates/templated_email/source/*partials/*\" -not -path \"templates/templated_email/source/*shared/*\" -exec ./node_modules/.bin/mjml -l skip {} -o templates/templated_email/compiled/ \\;",
+    "build-emails-shop": "mkdir -p shop/templates/templated_email/compiled && find shop/templates -name \"*.mjml\" -exec ./node_modules/.bin/mjml -l skip {} -o shop/templates/templated_email/compiled/ \\;"
   }
 }

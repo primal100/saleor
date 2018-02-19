@@ -9,6 +9,8 @@ From {{ name }}:
 
 {{ message }}
 
+{% endblock %}
+
 {% block html %}
 {% include 'templated_email/compiled/contactus.html' %}
 {% endblock %}
