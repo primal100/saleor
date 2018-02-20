@@ -25,3 +25,11 @@ class ContactView(FormView):
         messages.success(self.request,
                          "Thanks for your e-mail We will respond as soon as possible")
         return result
+
+    def get_initial(self):
+        initial = super(ContactView, self).get_initial()
+
+        if self.request.user and self.request.user.is_authenticated:
+            initial['email'] = self.request.user.email
+
+        return initial
