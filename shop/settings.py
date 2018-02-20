@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     ]
 
 STATICFILES_DIRS = [
-    ('assets', os.path.join(PROJECT_ROOT, 'shop', 'static', 'assets')),
+    #('assets', os.path.join(PROJECT_ROOT, 'shop', 'static', 'assets')),
     ('images', os.path.join(PROJECT_ROOT, 'shop', 'static', 'images')),
 ] + STATICFILES_DIRS
 
