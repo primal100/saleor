@@ -75,7 +75,9 @@
                 Pay for order {{ order }}
               {% endblocktrans %}
             </h1>
-            Click the paypal logo or pay with card:
+            Thanks for ordering! <br>
+            Products are shipped from Uganda and may take up to three weeks to arrive at your destination. <br>
+            To pay for your order, click the Paypal logo or Pay with Card:
             <form method="post" action="{% url "order:payment" token=order.token %}" class="payment-method-form radio">
               {% csrf_token %}
               <button class="btn btn-secondary p-3 mt-0" type="submit" value="paypal" name="method"> <img src="{% static 'images/PayPal-logo.png' %}" width="80" /></button>
