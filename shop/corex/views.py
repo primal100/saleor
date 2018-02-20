@@ -23,7 +23,7 @@ class ContactView(FormView):
         form.send_email()
         result = super().form_valid(form)
         messages.success(self.request,
-                         "Thanks for your e-mail We will respond as soon as possible")
+                         "Thanks for your e-mail. We will respond as soon as possible.")
         return result
 
     def get_initial(self):
