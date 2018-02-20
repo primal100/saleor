@@ -187,11 +187,19 @@
   <footer class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-3">
-          <a href="{% url 'home' %}" class="footer__logo">
-            <svg data-src="{% static "images/logo.svg" %}" height="38px" width="176px"/>
+        <ul class="col-md-3">
+          <li>
+          <a href="https://www.stripe.com" target="_blank">
+            <img src="{% static "images/powered_by_stripe.svg" %}"height="38px" width="176px"/>
           </a>
-        </div>
+          </li>
+          <li>
+            <br>
+          </li>
+          <li>
+          <a href="#" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700');"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_payments_by_pp_2line.png" border="0" alt="Payments by PayPal"></a><li style="text-align:center">
+          </li>
+        </ul>
         <div class="col-md-3 col-sm-6">
           <ul>
             {% for category in categories %}
@@ -259,7 +267,7 @@
             <svg data-src="{% static "images/facebook-logo.svg" %}" width="45px" height="45px"/>
           </a>
         </div>
-      </div>
+      </ul>
     </div>
   </footer>
 {% endblock %}
