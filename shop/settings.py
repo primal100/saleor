@@ -111,7 +111,7 @@ PAYMENT_VARIANTS = {
         'capture': False}),
     'stripe': ('payments.stripe.StripeProvider', {
         'secret_key': os.environ.get("STRIPE_SECRET"),
-        'public_key': 'pk_test_nxCSX2soBvRTS1Q5MYejQ8vN'})
+        'public_key': os.environ.get("STRIPE_PUBLIC")})
     }
 CHECKOUT_PAYMENT_CHOICES = [
     ('paypal', 'Paypal'), ('stripe', 'Credit Card')]
