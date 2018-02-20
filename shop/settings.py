@@ -106,12 +106,12 @@ MIDDLEWARE = [
 PAYMENT_VARIANTS = {
     'paypal': ('payments.paypal.PaypalProvider', {
         'client_id': os.environ.get("PAYPAL_CLIENT_ID"),
-        'secret': os.environ.get("PAYPAL_SECRET"),
+        'secret': os.environ.get('PAYPAL_SECRET'),
         'endpoint': os.environ.get('PAYPAL_URL'),
         'capture': True}),
     'stripe': ('payments.stripe.StripeProvider', {
-        'secret_key': os.environ.get("STRIPE_SECRET"),
-        'public_key': os.environ.get("STRIPE_PUBLIC")})
+        'secret_key': os.environ.get('STRIPE_SECRET'),
+        'public_key': os.environ.get('STRIPE_PUBLIC')})
     }
 CHECKOUT_PAYMENT_CHOICES = [
     ('paypal', 'Paypal'), ('stripe', 'Credit Card')]
