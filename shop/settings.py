@@ -7,7 +7,7 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 TIME_ZONE = 'Africa/Kampala'
 USE_I18N = False
 
-CONTACT_EMAIL = 'info@nilepottery.com'
+CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
 
 INSTALLED_APPS = [
     # External apps that need to go before django's
