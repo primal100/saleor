@@ -1,4 +1,5 @@
 from saleor.settings import *
+CELERY_TASK_ALWAYS_EAGER = True
 
 ROOT_URLCONF = 'shop.urls'
 
@@ -9,59 +10,12 @@ USE_I18N = False
 
 CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL')
 
-INSTALLED_APPS = [
-    # External apps that need to go before django's
-    'storages',
-
-    # Django modules
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.sitemaps',
-    'django.contrib.sites',
-    'django.contrib.staticfiles',
-    'django.contrib.auth',
-    'django.contrib.postgres',
-    'django.forms',
-
-    # Local apps
-    'saleor.account',
-    'saleor.discount',
-    'saleor.product',
-    'saleor.cart',
-    'saleor.checkout',
-    'saleor.core',
-    'saleor.graphql',
-    'saleor.order.OrderAppConfig',
-    'saleor.dashboard',
-    'saleor.shipping',
-    'saleor.search',
-    'saleor.site',
-    'saleor.data_feeds',
-
-    # External apps
-    'versatileimagefield',
-    'django_babel',
-    'bootstrap4',
-    'django_fsm',
-    'django_prices',
-    'django_prices_openexchangerates',
-    'graphene_django',
-    'mptt',
-    'payments',
-    'webpack_loader',
-    'social_django',
-    'django_countries',
-    'django_filters',
-    'django_celery_results',
-    'impersonate',
-    'phonenumber_field',
-
+INSTALLED_APPS += [
     #Custom apps
     'shop.corex',
     'shop.orderx',
     'shop.productx'
-    ]
+]
 
 STATICFILES_DIRS = [
     #('assets', os.path.join(PROJECT_ROOT, 'shop', 'static', 'assets')),

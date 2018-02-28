@@ -202,13 +202,21 @@
         </ul>
         <div class="col-md-3 col-sm-6">
           <ul>
-            {% for category in categories %}
-              <li>
-                <a href="{{ category.get_absolute_url }}">
-                  {{ category|capfirst }}
-                </a>
-              </li>
-            {% endfor %}
+            <li>
+                  <a href="{% url "privacy-policy" %}" target="_blank">
+                    {% trans "Privacy Policy" context "Main navigation item" %}
+                  </a>
+            </li>
+            <li>
+                  <a href="{% url "terms" %}" target="_blank">
+                    {% trans "Terms & Conditions" context "Main navigation item" %}
+                  </a>
+            </li>
+            <li>
+                  <a href="{% url "refund-policy" %}" target="_blank">
+                    {% trans "Refund Policy" context "Main navigation item" %}
+                  </a>
+            </li>
           </ul>
         </div>
         <div class="col-md-3 col-sm-6">
